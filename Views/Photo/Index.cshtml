@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Paragwan.Models.Photo>
+@{
+    ViewData["Title"] = "Photo Sharing";
+}
+
+<div class="photo-container fade-in">
+    <h2>Shared Photos</h2>
+    <div class="row">
+        @foreach (var photo in Model)
+        {
+            <div class="col-md-4">
+                <div class="card animated-card">
+                    <img src="@photo.ImageUrl" class="card-img-top" alt="@photo.Title" />
+                    <div class="card-body">
+                        <h5 class="card-title">@photo.Title</h5>
+                        <p class="card-text">@photo.Description</p>
+                        <p><strong>Uploaded At:</strong> @photo.UploadedAt.ToString("MM/dd/yyyy")</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

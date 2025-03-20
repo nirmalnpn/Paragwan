@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="register-container fade-in">
+    <h2>Register</h2>
+    <form method="post" enctype="multipart/form-data" class="form-container">
+        <div class="mb-3">
+            <label>Full Name:</label>
+            <input type="text" name="FullName" autocomplete="name" class="form-control animated-input" required />
+        </div>
+        <div class="mb-3">
+            <label>Email:</label>
+            <input type="email" name="Email" autocomplete="email" class="form-control animated-input" required />
+        </div>
+        <div class="mb-3">
+            <label>Password:</label>
+            <input type="password" name="Password" autocomplete="new-password" class="form-control animated-input" required />
+        </div>
+        <div class="mb-3">
+            <label>Address:</label>
+            <input type="text" name="Address" class="form-control animated-input" required />
+        </div>
+        <div class="mb-3">
+            <label>Phone Number:</label>
+            <input type="tel" name="PhoneNumber" class="form-control animated-input" required />
+        </div>
+        <div class="mb-3">
+            <label>National ID:</label>
+            <input type="text" name="NationalID" class="form-control animated-input" required />
+        </div>
+        <div class="mb-3">
+            <label>National ID Photo:</label>
+            <input type="file" name="Photo" accept="image/*" class="form-control animated-input" />
+        </div>
+        <div class="mb-3">
+            <label>Profile Picture:</label>
+            <input type="file" name="ProfilePicture" accept="image/*" class="form-control animated-input" />
+        </div>
+        <button type="submit" class="btn btn-primary animated-button">Register</button>
+    </form>
+</div>

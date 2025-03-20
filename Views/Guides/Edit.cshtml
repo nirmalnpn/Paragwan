@@ -1,0 +1,23 @@
+﻿@model Paragwan.Models.Guide
+
+<div class="form-container fade-in">
+    <h2>Edit Guide Information</h2>
+    <form method="post">
+        <div class="form-group">
+            <label>Bio:</label>
+            <textarea name="Bio" class="form-control animated-input" required>@Model.Bio</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Experience Years:</label>
+            <input type="number" name="ExperienceYears" class="form-control animated-input" value="@Model.ExperienceYears" required>
+        </div>
+
+        <div class="form-group">
+            <label>Ratings:</label>
+            <input type="number" step="0.1" name="Ratings" class="form-control animated-input" value="@Model.Ratings" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary animated-button">Update Guide</button>
+    </form>
+</div>

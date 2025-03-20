@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Paragwan.Models.Guide>
+
+<div class="guide-container fade-in">
+    <h2>Guides</h2>
+    <div class="row">
+        @foreach (var guide in Model)
+        {
+            <div class="col-md-4">
+                <div class="card animated-card">
+                    <div class="card-body">
+                        <h5>Guide: @guide.UserId</h5>
+                        <p>@guide.Bio</p>
+                        <p><strong>Experience Years:</strong> @guide.ExperienceYears</p>
+                        <p><strong>Ratings:</strong> @guide.Ratings</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

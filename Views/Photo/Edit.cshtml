@@ -1,0 +1,21 @@
+﻿@model Paragwan.Models.Photo
+
+<h2>Edit Photo</h2>
+
+<form method="post">
+    <div>
+        <label>Title:</label>
+        <input type="text" name="Title" value="@Model.Title" required />
+    </div>
+    <div>
+        <label>Description:</label>
+        <textarea name="Description">@Model.Description</textarea>
+    </div>
+    <div>
+        <label>Image URL:</label>
+        <input type="text" name="ImageUrl" value="@Model.ImageUrl" required />
+    </div>
+    <div>
+        <button type="submit">Update</button>
+    </div>
+</form>

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Paragwan.Models.ParaglidingDetail>
+
+<div class="paragliding-container fade-in">
+    <h2>Paragliding Adventures</h2>
+    <div class="row">
+        @foreach (var detail in Model)
+        {
+            <div class="col-md-4">
+                <div class="card animated-card">
+                    <img src="@detail.ImageUrl" class="card-img-top" alt="@detail.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@detail.Name</h5>
+                        <p>@detail.Description</p>
+                        <a href="#" class="btn btn-primary animated-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
