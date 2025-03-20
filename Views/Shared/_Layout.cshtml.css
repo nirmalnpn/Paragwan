@@ -1,32 +1,40 @@
-﻿body, html {
-    height: 100%;
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-}
-
-.navbar {
-    padding: 10px 20px;
-    transition: all 0.3s ease;
-}
-
-.navbar-brand {
-    font-size: 1.8rem;
-    color: #fff;
-}
-
-.nav-link {
-    color: #ddd;
-    margin-right: 15px;
-    transition: color 0.3s;
-}
-
-    .nav-link:hover {
-        color: #fff;
-    }
-
-.container {
+﻿/* Styling for Login and Register pages */
+.login-container, .register-container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 30px;
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
     border-radius: 10px;
-    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }

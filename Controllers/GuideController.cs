@@ -1,5 +1,4 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Paragwan.DataAccess;
 using Paragwan.Models;
 
@@ -16,65 +15,39 @@ namespace Paragwan.Controllers
 
         public IActionResult Index()
         {
-            var guides = _dapper.Query<Guide>("spGetAllGuides", null);
+            var guides = _dapper.Query<Guide>("GetGuides");
             return View(guides);
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         public IActionResult Create(Guide guide)
         {
-            try
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@UserId", guide.UserId);
-                parameters.Add("@Bio", guide.Bio);
-                parameters.Add("@ExperienceYears", guide.ExperienceYears);
-                parameters.Add("@Ratings", guide.Ratings);
-
-                _dapper.Execute("spAddGuide", parameters);
-                TempData["SuccessMessage"] = "Guide registered successfully!";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Error: " + ex.Message;
-                return View();
-            }
+            _dapper.Execute("AddGuide", guide);
+            TempData["SuccessMessage"] = "Guide added successfully!";
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@GuideId", id);
-
-            var guide = _dapper.QuerySingle<Guide>("spGetGuideById", parameters);
+            var guide = _dapper.QuerySingle<Guide>("GetGuideById", new { GuideId = id });
             return View(guide);
         }
 
         [HttpPost]
         public IActionResult Edit(Guide guide)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@GuideId", guide.GuideId);
-            parameters.Add("@Bio", guide.Bio);
-            parameters.Add("@ExperienceYears", guide.ExperienceYears);
-            parameters.Add("@Ratings", guide.Ratings);
-
-            _dapper.Execute("spUpdateGuide", parameters);
+            _dapper.Execute("UpdateGuide", guide);
+            TempData["SuccessMessage"] = "Guide updated successfully!";
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@GuideId", id);
-
-            _dapper.Execute("spDeleteGuide", parameters);
+            _dapper.Execute("DeleteGuide", new { GuideId = id });
+            TempData["SuccessMessage"] = "Guide deleted successfully!";
             return RedirectToAction("Index");
         }
     }

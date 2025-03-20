@@ -1,5 +1,4 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Paragwan.DataAccess;
 using Paragwan.Models;
 
@@ -15,45 +14,39 @@ namespace Paragwan.Controllers
         }
 
         public IActionResult Login() => View();
-
         public IActionResult Register() => View();
 
         [HttpPost]
         public IActionResult Register(User user)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@FullName", user.FullName);
-            parameters.Add("@Email", user.Email);
-            parameters.Add("@Address", user.Address);
-            parameters.Add("@PhoneNumber", user.PhoneNumber);
-            parameters.Add("@NationalID", user.NationalID);
-            parameters.Add("@Photo", user.Photo);
-            parameters.Add("@ProfilePicture", user.ProfilePicture);
-            parameters.Add("@Password", user.Password);
-            parameters.Add("@UserType", user.UserType);
+            var parameters = new
+            {
+                FullName = user.FullName,
+                Email = user.Email,
+                Address = user.Address,
+                PhoneNumber = user.PhoneNumber,
+                NationalID = user.NationalID,
+                Photo = user.Photo,
+                ProfilePicture = user.ProfilePicture,
+                Password = user.Password,
+                UserType = user.UserType
+            };
 
-            _dapper.Execute("spRegisterUser", parameters);
-
-            TempData["SuccessMessage"] = "Registration successful! You can now login.";
+            _dapper.Execute("RegisterUser", parameters);
+            TempData["SuccessMessage"] = "Registration successful! Please log in.";
             return RedirectToAction("Login");
         }
 
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@Email", email);
-            parameters.Add("@Password", password);
-
-            var user = _dapper.QuerySingle<User>("spLoginUser", parameters);
-
+            var user = _dapper.QuerySingle<User>("LoginUser", new { Email = email, Password = password });
             if (user != null)
             {
-                TempData["SuccessMessage"] = "Login successful! Welcome to Paragwan.";
+                TempData["SuccessMessage"] = "Login successful! Welcome.";
                 return RedirectToAction("Index", "Home");
             }
-
-            TempData["ErrorMessage"] = "Invalid login credentials. Please try again.";
+            TempData["ErrorMessage"] = "Invalid login credentials.";
             return View();
         }
     }

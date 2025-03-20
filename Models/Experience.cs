@@ -1,6 +1,6 @@
 ﻿namespace Paragwan.Models
 {
-    public class Experience
+    public class ClientExperience
     {
         public int ExperienceId { get; set; }
         public int UserId { get; set; }

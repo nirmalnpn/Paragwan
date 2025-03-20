@@ -1,4 +1,5 @@
 ﻿@model Paragwan.Models.Guide
+<link rel="stylesheet" href="~/css/Guide.css" />
 
 <div class="form-container fade-in">
     <h2>Add Guide Information</h2>
@@ -7,17 +8,14 @@
             <label>Bio:</label>
             <textarea name="Bio" class="form-control animated-input" required></textarea>
         </div>
-
         <div class="form-group">
             <label>Experience Years:</label>
-            <input type="number" name="ExperienceYears" class="form-control animated-input" required>
+            <input type="number" name="ExperienceYears" class="form-control animated-input" required />
         </div>
-
         <div class="form-group">
             <label>Ratings:</label>
-            <input type="number" step="0.1" name="Ratings" class="form-control animated-input" required>
+            <input type="number" step="0.1" name="Ratings" class="form-control animated-input" required />
         </div>
-
-        <button type="submit" class="btn btn-primary animated-button">Add Guide</button>
+        <button type="submit" class="btn btn-primary animated-button">Submit</button>
     </form>
 </div>

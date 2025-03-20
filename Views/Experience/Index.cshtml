@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Paragwan.Models.ClientExperience>
+<link rel="stylesheet" href="~/css/Experience.css" />
+
+<h2 class="fade-in">Client Experiences</h2>
+<div class="experience-list">
+    @foreach (var exp in Model)
+    {
+        <div class="experience-card animate__animated animate__zoomIn">
+            <p>@exp.Description</p>
+            <p><strong>Rating:</strong> @exp.Rating / 5</p>
+            <a href="/Experience/Edit/@exp.ExperienceId" class="btn btn-primary animated-button">Edit</a>
+            <form method="post" action="/Experience/Delete" style="display:inline;">
+                <input type="hidden" name="id" value="@exp.ExperienceId" />
+                <button type="submit" class="btn btn-danger animated-button">Delete</button>
+            </form>
+        </div>
+    }
+</div>
+<a href="/Experience/Create" class="btn btn-primary animated-button">Share Your Experience</a>

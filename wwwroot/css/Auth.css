@@ -18,10 +18,10 @@
     transition: all 0.3s;
 }
 
-    .animated-input:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
+.animated-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 
 /* File Input Styling */
 input[type="file"] {
@@ -31,9 +31,9 @@ input[type="file"] {
     transition: all 0.3s;
 }
 
-    input[type="file"]:hover {
-        border-color: #007bff;
-    }
+input[type="file"]:hover {
+    border-color: #007bff;
+}
 
 
 /* Buttons */
@@ -45,10 +45,10 @@ input[type="file"] {
     border-radius: 5px;
 }
 
-    .animated-button:hover {
-        background-color: #0056b3;
-        transform: scale(1.05);
-    }
+.animated-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
 
 /* Fade-In Animation */
 .fade-in {
@@ -65,4 +65,36 @@ input[type="file"] {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+
+.register-container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }

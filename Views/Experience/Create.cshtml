@@ -1,0 +1,17 @@
+﻿@model Paragwan.Models.ClientExperience
+<link rel="stylesheet" href="~/css/Experience.css" />
+
+<div class="form-container fade-in">
+    <h2>Share Your Experience</h2>
+    <form method="post">
+        <div class="form-group">
+            <label>Your Experience:</label>
+            <textarea name="Description" class="form-control animated-input" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Rating (1-5):</label>
+            <input type="number" name="Rating" class="form-control animated-input" min="1" max="5" required />
+        </div>
+        <button type="submit" class="btn btn-primary animated-button">Submit</button>
+    </form>
+</div>

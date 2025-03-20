@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Paragwan.Models.Guide>
+<link rel="stylesheet" href="~/css/Guide.css" />
+
+<h2 class="fade-in">Guide Details</h2>
+<div class="guide-list">
+    @foreach (var guide in Model)
+    {
+        <div class="guide-card animate__animated animate__zoomIn">
+            <h3>Guide: @guide.Bio</h3>
+            <p><strong>Experience Years:</strong> @guide.ExperienceYears</p>
+            <p><strong>Ratings:</strong> @guide.Ratings</p>
+            <a href="/Guide/Edit/@guide.GuideId" class="btn btn-primary animated-button">Edit</a>
+            <form method="post" action="/Guide/Delete" style="display:inline;">
+                <input type="hidden" name="id" value="@guide.GuideId" />
+                <button type="submit" class="btn btn-danger animated-button">Delete</button>
+            </form>
+        </div>
+    }
+</div>
+<a href="/Guide/Create" class="btn btn-primary animated-button">Add New Guide</a>

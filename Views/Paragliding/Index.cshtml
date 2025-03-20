@@ -1,20 +1,23 @@
 ﻿@model IEnumerable<Paragwan.Models.ParaglidingDetail>
+<link rel="stylesheet" href="~/css/Paragliding.css" />
 
-<div class="paragliding-container fade-in">
-    <h2>Paragliding Adventures</h2>
-    <div class="row">
-        @foreach (var detail in Model)
-        {
-            <div class="col-md-4">
-                <div class="card animated-card">
-                    <img src="@detail.ImageUrl" class="card-img-top" alt="@detail.Name">
-                    <div class="card-body">
-                        <h5 class="card-title">@detail.Name</h5>
-                        <p>@detail.Description</p>
-                        <a href="#" class="btn btn-primary animated-button">View Details</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
+<h2 class="fade-in">Paragliding Adventures</h2>
+<div class="paragliding-container">
+    @foreach (var item in Model)
+    {
+        <div class="paragliding-card animate__animated animate__zoomIn">
+            <img src="@item.ImageUrl" alt="@item.Name" />
+            <h3>@item.Name</h3>
+            <p>@item.Description</p>
+            <p><strong>Location:</strong> @item.Location</p>
+            <p><strong>Price:</strong> $@item.Price</p>
+            <p><strong>Duration:</strong> @item.Duration</p>
+            <a href="/Paragliding/Edit/@item.ParaglidingId" class="btn btn-primary animated-button">Edit</a>
+            <form method="post" action="/Paragliding/Delete" style="display:inline;">
+                <input type="hidden" name="id" value="@item.ParaglidingId" />
+                <button type="submit" class="btn btn-danger animated-button">Delete</button>
+            </form>
+        </div>
+    }
 </div>
+<a href="/Paragliding/Create" class="btn btn-primary animated-button">Add New Adventure</a>

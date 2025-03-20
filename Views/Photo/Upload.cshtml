@@ -1,23 +1,21 @@
 ﻿@model Paragwan.Models.Photo
+<link rel="stylesheet" href="~/css/Photo.css" />
 
 <div class="form-container fade-in">
     <h2>Upload a Photo</h2>
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label>Title:</label>
-            <input type="text" name="Title" class="form-control animated-input" required>
+            <input type="text" name="Title" class="form-control animated-input" required />
         </div>
-
         <div class="form-group">
             <label>Description:</label>
             <textarea name="Description" class="form-control animated-input" required></textarea>
         </div>
-
         <div class="form-group">
             <label>Image:</label>
-            <input type="file" name="ImageUrl" class="form-control animated-input" required>
+            <input type="file" name="ImageUrl" class="form-control animated-input" required />
         </div>
-
         <button type="submit" class="btn btn-primary animated-button">Upload</button>
     </form>
 </div>

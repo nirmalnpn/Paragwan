@@ -1,5 +1,4 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Paragwan.DataAccess;
 using Paragwan.Models;
 
@@ -16,53 +15,40 @@ namespace Paragwan.Controllers
 
         public IActionResult Index()
         {
-            var photos = _dapper.Query<Photo>("spGetAllPhotos", null);
+            var photos = _dapper.Query<Photo>("GetPhotos");
             return View(photos);
         }
 
-        public IActionResult Upload()
-        {
-            return View();
-        }
+        public IActionResult Upload() => View();
 
         [HttpPost]
         public IActionResult Upload(Photo photo)
         {
-            try
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@UserId", photo.UserId);
-                parameters.Add("@Title", photo.Title);
-                parameters.Add("@Description", photo.Description);
-                parameters.Add("@ImageUrl", photo.ImageUrl);
-
-                _dapper.Execute("spAddPhoto", parameters);
-                TempData["SuccessMessage"] = "Photo uploaded successfully!";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Error: " + ex.Message;
-                return View();
-            }
-        }
-
-        public IActionResult Delete(int id)
-        {
-            try
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@PhotoId", id);
-
-                _dapper.Execute("spDeletePhoto", parameters);
-                TempData["SuccessMessage"] = "Photo deleted successfully!";
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Error: " + ex.Message;
-            }
+            _dapper.Execute("AddPhoto", photo);
+            TempData["SuccessMessage"] = "Photo uploaded successfully!";
             return RedirectToAction("Index");
         }
 
+        public IActionResult Edit(int id)
+        {
+            var photo = _dapper.QuerySingle<Photo>("GetPhotoById", new { PhotoId = id });
+            return View(photo);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Photo photo)
+        {
+            _dapper.Execute("UpdatePhoto", photo);
+            TempData["SuccessMessage"] = "Photo updated successfully!";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _dapper.Execute("DeletePhoto", new { PhotoId = id });
+            TempData["SuccessMessage"] = "Photo deleted successfully!";
+            return RedirectToAction("Index");
+        }
     }
 }

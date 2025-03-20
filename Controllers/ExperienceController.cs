@@ -1,5 +1,4 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Paragwan.DataAccess;
 using Paragwan.Models;
 
@@ -16,65 +15,40 @@ namespace Paragwan.Controllers
 
         public IActionResult Index()
         {
-            var experiences = _dapper.Query<Experience>("spGetAllClientExperiences", null);
+            var experiences = _dapper.Query<ClientExperience>("GetClientExperiences");
             return View(experiences);
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+
+        public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create(Experience experience)
+        public IActionResult Create(ClientExperience experience)
         {
-            try
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@UserId", experience.UserId);
-                parameters.Add("@Description", experience.Description);
-                parameters.Add("@Rating", experience.Rating);
-
-                _dapper.Execute("spAddClientExperience", parameters);
-                TempData["SuccessMessage"] = "Experience shared successfully!";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Error: " + ex.Message;
-                return View();
-            }
+            _dapper.Execute("AddClientExperience", experience);
+            TempData["SuccessMessage"] = "Experience shared successfully!";
+            return RedirectToAction("Index");
         }
-
-
 
         public IActionResult Edit(int id)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@ExperienceId", id);
-
-            var experience = _dapper.QuerySingle<Experience>("spGetClientExperienceById", parameters);
+            var experience = _dapper.QuerySingle<ClientExperience>("GetClientExperienceById", new { ExperienceId = id });
             return View(experience);
         }
 
         [HttpPost]
-        public IActionResult Edit(Experience experience)
+        public IActionResult Edit(ClientExperience experience)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@ExperienceId", experience.ExperienceId);
-            parameters.Add("@Description", experience.Description);
-            parameters.Add("@Rating", experience.Rating);
-
-            _dapper.Execute("spUpdateClientExperience", parameters);
+            _dapper.Execute("UpdateClientExperience", experience);
+            TempData["SuccessMessage"] = "Experience updated successfully!";
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@ExperienceId", id);
-
-            _dapper.Execute("spDeleteClientExperience", parameters);
+            _dapper.Execute("DeleteClientExperience", new { ExperienceId = id });
+            TempData["SuccessMessage"] = "Experience deleted successfully!";
             return RedirectToAction("Index");
         }
     }

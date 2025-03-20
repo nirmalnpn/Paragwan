@@ -1,5 +1,4 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Paragwan.DataAccess;
 using Paragwan.Models;
 
@@ -16,88 +15,39 @@ namespace Paragwan.Controllers
 
         public IActionResult Index()
         {
-            var paraglidingDetails = _dapper.Query<ParaglidingDetail>("GetParaglidingById", new { ParaglidingId = 1 });
-            return View(paraglidingDetails);
+            var details = _dapper.Query<ParaglidingDetail>("GetParaglidingDetails");
+            return View(details);
         }
 
-
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         public IActionResult Create(ParaglidingDetail detail)
         {
-            try
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@Name", detail.Name);
-                parameters.Add("@Description", detail.Description);
-                parameters.Add("@Location", detail.Location);
-                parameters.Add("@Price", detail.Price);
-                parameters.Add("@Duration", detail.Duration);
-                parameters.Add("@ImageUrl", detail.ImageUrl);
-
-                _dapper.Execute("spAddParaglidingDetail", parameters);
-                TempData["SuccessMessage"] = "Paragliding adventure added successfully!";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Error: " + ex.Message;
-                return View();
-            }
+            _dapper.Execute("AddParaglidingDetail", detail);
+            TempData["SuccessMessage"] = "Paragliding detail added successfully!";
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@ParaglidingId", id);
-
-            var detail = _dapper.QuerySingle<ParaglidingDetail>("spGetParaglidingById", parameters);
+            var detail = _dapper.QuerySingle<ParaglidingDetail>("GetParaglidingById", new { ParaglidingId = id });
             return View(detail);
         }
 
         [HttpPost]
         public IActionResult Edit(ParaglidingDetail detail)
         {
-            try
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@ParaglidingId", detail.ParaglidingId);
-                parameters.Add("@Name", detail.Name);
-                parameters.Add("@Description", detail.Description);
-                parameters.Add("@Location", detail.Location);
-                parameters.Add("@Price", detail.Price);
-                parameters.Add("@Duration", detail.Duration);
-                parameters.Add("@ImageUrl", detail.ImageUrl);
-
-                _dapper.Execute("spUpdateParaglidingDetail", parameters);
-                TempData["SuccessMessage"] = "Paragliding adventure updated successfully!";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Error: " + ex.Message;
-                return View(detail);
-            }
+            _dapper.Execute("UpdateParaglidingDetail", detail);
+            TempData["SuccessMessage"] = "Paragliding detail updated successfully!";
+            return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@ParaglidingId", id);
-
-                _dapper.Execute("spDeleteParaglidingDetail", parameters);
-                TempData["SuccessMessage"] = "Paragliding adventure deleted successfully!";
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Error: " + ex.Message;
-            }
+            _dapper.Execute("DeleteParaglidingDetail", new { ParaglidingId = id });
+            TempData["SuccessMessage"] = "Paragliding detail deleted successfully!";
             return RedirectToAction("Index");
         }
     }

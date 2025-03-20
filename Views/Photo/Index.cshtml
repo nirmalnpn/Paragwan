@@ -1,23 +1,20 @@
 ﻿@model IEnumerable<Paragwan.Models.Photo>
-@{
-    ViewData["Title"] = "Photo Sharing";
-}
+<link rel="stylesheet" href="~/css/Photo.css" />
 
-<div class="photo-container fade-in">
-    <h2>Shared Photos</h2>
-    <div class="row">
-        @foreach (var photo in Model)
-        {
-            <div class="col-md-4">
-                <div class="card animated-card">
-                    <img src="@photo.ImageUrl" class="card-img-top" alt="@photo.Title" />
-                    <div class="card-body">
-                        <h5 class="card-title">@photo.Title</h5>
-                        <p class="card-text">@photo.Description</p>
-                        <p><strong>Uploaded At:</strong> @photo.UploadedAt.ToString("MM/dd/yyyy")</p>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
+<h2 class="fade-in">Photo Gallery</h2>
+<div class="photo-gallery">
+    @foreach (var photo in Model)
+    {
+        <div class="photo-card animate__animated animate__zoomIn">
+            <img src="@photo.ImageUrl" alt="@photo.Title" />
+            <h3>@photo.Title</h3>
+            <p>@photo.Description</p>
+            <a href="/Photo/Edit/@photo.PhotoId" class="btn btn-primary animated-button">Edit</a>
+            <form method="post" action="/Photo/Delete" style="display:inline;">
+                <input type="hidden" name="id" value="@photo.PhotoId" />
+                <button type="submit" class="btn btn-danger animated-button">Delete</button>
+            </form>
+        </div>
+    }
 </div>
+<a href="/Photo/Upload" class="btn btn-primary animated-button">Upload New Photo</a>
