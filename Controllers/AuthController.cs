@@ -21,18 +21,17 @@ namespace Paragwan.Controllers
         public IActionResult Register(User user)
         {
             var parameters = new
-            {
-                FullName = user.FullName,
-                Email = user.Email,
-                Address = user.Address,
-                PhoneNumber = user.PhoneNumber,
-                NationalID = user.NationalID,
-                Photo = user.Photo, // National ID Photo
-                ProfilePicture = user.ProfilePicture,
-                Password = user.Password,
-                UserType = user.UserType
-            };
-
+                {
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    Address = user.Address,
+                    PhoneNumber = user.PhoneNumber,
+                    NationalID = user.NationalID,
+                    Photo = user.Photo,
+                    ProfilePicture = user.ProfilePicture,
+                    Password = user.Password,
+                    UserType = user.UserType
+                };
             _dapper.Execute("RegisterUser", parameters);
             TempData["SuccessMessage"] = "Registration successful! Please log in.";
             return RedirectToAction("Login");
