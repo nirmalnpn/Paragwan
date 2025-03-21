@@ -1,10 +1,11 @@
 ﻿body {
-    background: url('https://cdn.britannica.com/32/142132-050-BEE32264/Paragliding.jpg') no-repeat center center fixed;
+    background: url('https://static.vecteezy.com/system/resources/thumbnails/024/617/591/small_2x/men-glide-high-up-in-mid-air-risking-danger-for-adventure-generated-by-ai-photo.jpg') no-repeat center center fixed;
     background-size: cover;
+    font-family: 'Roboto', sans-serif;
 }
 .home-container {
     height: 80vh;
-    display: flex;z
+    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;

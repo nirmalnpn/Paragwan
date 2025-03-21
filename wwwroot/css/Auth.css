@@ -1,11 +1,16 @@
-﻿/* Styling for Login and Register pages */
+﻿body {
+    background: url('https://cdn.britannica.com/32/142132-050-BEE32264/Paragliding.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Styling for Login and Register pages */
 .login-container, .register-container {
     width: 400px;
     margin: 50px auto;
     padding: 30px;
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -34,7 +39,18 @@ h2 {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-    .btn:hover {
-        background-color: #0056b3;
-        transform: scale(1.05);
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Optional: Responsive tweaks */
+@media (max-width: 576px) {
+    .login-container, .register-container {
+        width: 90%;
+        padding: 20px;
     }
+    h2 {
+        font-size: 1.5rem;
+    }
+}
