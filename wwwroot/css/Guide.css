@@ -13,6 +13,6 @@
     transition: transform 0.3s;
 }
 
-.guide-card:hover {
-    transform: scale(1.05);
-}
+    .guide-card:hover {
+        transform: scale(1.05);
+    }

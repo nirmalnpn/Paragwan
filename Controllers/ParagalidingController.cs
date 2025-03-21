@@ -7,18 +7,15 @@ namespace Paragwan.Controllers
     public class ParaglidingController : Controller
     {
         private readonly DapperHelper _dapper;
-
         public ParaglidingController(DapperHelper dapper)
         {
             _dapper = dapper;
         }
-
         public IActionResult Index()
         {
             var details = _dapper.Query<ParaglidingDetail>("GetParaglidingDetails");
             return View(details);
         }
-
         public IActionResult Create() => View();
 
         [HttpPost]
@@ -28,13 +25,11 @@ namespace Paragwan.Controllers
             TempData["SuccessMessage"] = "Paragliding detail added successfully!";
             return RedirectToAction("Index");
         }
-
         public IActionResult Edit(int id)
         {
             var detail = _dapper.QuerySingle<ParaglidingDetail>("GetParaglidingById", new { ParaglidingId = id });
             return View(detail);
         }
-
         [HttpPost]
         public IActionResult Edit(ParaglidingDetail detail)
         {
@@ -42,7 +37,6 @@ namespace Paragwan.Controllers
             TempData["SuccessMessage"] = "Paragliding detail updated successfully!";
             return RedirectToAction("Index");
         }
-
         [HttpPost]
         public IActionResult Delete(int id)
         {

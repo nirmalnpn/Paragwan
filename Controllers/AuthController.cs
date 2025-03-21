@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Paragwan.DataAccess;
 using Paragwan.Models;
 
@@ -26,7 +27,7 @@ namespace Paragwan.Controllers
                 Address = user.Address,
                 PhoneNumber = user.PhoneNumber,
                 NationalID = user.NationalID,
-                Photo = user.Photo,
+                Photo = user.Photo, // National ID Photo
                 ProfilePicture = user.ProfilePicture,
                 Password = user.Password,
                 UserType = user.UserType
@@ -44,6 +45,8 @@ namespace Paragwan.Controllers
             if (user != null)
             {
                 TempData["SuccessMessage"] = "Login successful! Welcome.";
+                // Store user ID in session for profile access
+                HttpContext.Session.SetInt32("UserId", user.UserId);
                 return RedirectToAction("Index", "Home");
             }
             TempData["ErrorMessage"] = "Invalid login credentials.";

@@ -1,12 +1,132 @@
-﻿@{
+﻿@model Paragwan.Models.HomeViewModel
+@{
     ViewData["Title"] = "Home - Paragwan";
 }
-<link rel="stylesheet" href="~/css/home.css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/home.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<body>
+    <!-- Navigation is included from _Layout.cshtml -->
+    @* The navigation and common layout is defined in _Layout.cshtml *@
 
-<div class="home-container fade-in">
-    <div class="intro-text">
-        <h1>Welcome to Paragwan</h1>
-        <p>Experience the thrill of paragliding in beautiful Chitwan!</p>
-        <a href="/Paragliding/Index" class="btn btn-primary animated-button">Explore Adventures</a>
+    <!-- Hero Section -->
+    <div class="home-container fade-in d-flex align-items-center justify-content-center text-center">
+        <div class="intro-text">
+            <h1 class="animate__animated animate__fadeInDown">Welcome to Paragwan</h1>
+            <p class="lead animate__animated animate__fadeInUp">Experience the thrill of paragliding in beautiful Chitwan!</p>
+            <a href="/Paragliding/Index" class="btn btn-primary animated-button animate__animated animate__zoomIn">Explore Adventures</a>
+        </div>
     </div>
-</div>
+
+    <!-- Dynamic Adventures Section -->
+    <section class="dynamic-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Featured Adventures</h2>
+            <div class="row">
+                @foreach (var adventure in Model.Adventures)
+                {
+                    <div class="col-md-4">
+                        <div class="card animate__animated animate__zoomIn">
+                            <img src="@adventure.ImageUrl" class="card-img-top" alt="@adventure.Name" />
+                            <div class="card-body">
+                                <h5 class="card-title">@adventure.Name</h5>
+                                <p class="card-text">@adventure.Description</p>
+                                <p><strong>Location:</strong> @adventure.Location</p>
+                                <p><strong>Price:</strong> $@adventure.Price</p>
+                                <p><strong>Duration:</strong> @adventure.Duration</p>
+                                <a href="/Paragliding/Index" class="btn btn-primary animated-button">View All</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Photo Gallery Section -->
+    <section class="dynamic-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Photo Gallery</h2>
+            <div class="row">
+                @foreach (var photo in Model.Photos)
+                {
+                    <div class="col-md-4">
+                        <div class="card animate__animated animate__zoomIn">
+                            <img src="@photo.ImageUrl" class="card-img-top" alt="@photo.Title" />
+                            <div class="card-body">
+                                <h5 class="card-title">@photo.Title</h5>
+                                <p class="card-text">@photo.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Client Experiences Section -->
+    <section class="dynamic-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Client Experiences</h2>
+            <div class="row">
+                @foreach (var exp in Model.Experiences)
+                {
+                    <div class="col-md-4">
+                        <div class="card animate__animated animate__zoomIn">
+                            <div class="card-body">
+                                <p class="card-text">@exp.Description</p>
+                                <p><strong>Rating:</strong> @exp.Rating / 5</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- About and Mission Sections (Static) -->
+    <section class="about-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuWVof1Xc5aGSwntyGikb0kgAGqCLn7nwXow&s" alt="Paragliding" class="img-fluid rounded animate__animated animate__fadeInLeft">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="mb-4 animate__animated animate__fadeInRight">Our Story</h2>
+                    <p class="animate__animated animate__fadeInRight">
+                        Founded with a passion for adventure and the skies, Paragwan offers a unique paragliding experience in the stunning landscape of Chitwan.
+                    </p>
+                    <p class="animate__animated animate__fadeInRight">
+                        Our dedicated team ensures safety, excitement, and unforgettable memories.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-section py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="animate__animated animate__fadeInUp">Our Mission</h2>
+            <p class="lead animate__animated animate__fadeInUp">
+                To inspire adventure and bring the beauty of flight closer to everyone.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>&copy; 2025 Paragwan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
